@@ -1,0 +1,16 @@
+{
+  "entryFile": "apps/api/src/main.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "spec": {
+    "outputDirectory": "apps/api",
+    "specVersion": 3,
+    "version": "0.0.1",
+    "host": "api.psyapp.com"
+  },
+  "ignore": ["**/node_modules/**"],
+  "compilerOptions": {
+    "paths": {
+      "@libs/orm": ["libs/orm/src/index.ts"]
+    }
+  }
+}
