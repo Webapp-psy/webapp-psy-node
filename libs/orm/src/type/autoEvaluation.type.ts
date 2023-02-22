@@ -22,3 +22,14 @@ export type AutoEvaluationsResponse = {
    */
   totalAutoEvaluations: number;
 };
+
+export type PostAutoEvaluationBody = {
+  event: string;
+  automaticThoughts: string;
+  emotions: PostEmotions[];
+}
+
+export type PostEmotions = {
+  title: string;
+  percentage: number;
+}

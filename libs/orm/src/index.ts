@@ -10,6 +10,7 @@ export * from '../src/model/patient.model';
 export * from '../src/model/emotion.model';
 export * from '../src/util/model.util';
 export * from '../src/util/date.util';
+export * from '../src/util/httpError.util';
 export * from '../src/service/patient.service';
 export * from '../src/service/autoEvaluationTest.service';
 export * from '../src/repository/patient.repository';

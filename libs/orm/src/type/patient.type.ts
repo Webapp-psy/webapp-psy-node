@@ -22,3 +22,19 @@ export type PatientsResponse = {
    */
   totalPatients: number;
 };
+
+export type CreatePatientBody = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  dateOfBirth?: Date;
+  isEnabled: boolean;
+};
+
+export type PutPatient = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  dateOfBirth?: Date;
+  isEnabled?: boolean;
+};

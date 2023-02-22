@@ -4,27 +4,27 @@ import { AutoEvaluationTestModel } from "./autoEvaluationTest.model";
 export class PatientModel {
   id: number;
   /**
-   * portfolio name
+   * patient firstname
    */
   firstName: string;
   /**
-   * portfolio short description
+   * patient lastname
    */
   lastName: string;
   /**
-   * portfolio description
+   * patient email
    */
   email: string;
   /**
-   * portfolio logoUrl
+   * patient date of birth
    */
   dateOfBirth: Date;
   /**
-   * portfolio is visible or not
+   * patient is visible or not
    */
   isEnabled: boolean;
   /**
-   * portfolio assets
+   * patient autoEvaluationTests
    */
   autoEvaluationTest: AutoEvaluationTestModel[];
 
