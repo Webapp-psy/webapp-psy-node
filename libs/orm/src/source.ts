@@ -4,6 +4,8 @@ import { PatientEntity } from "./entity/patient.entity";
 import { PsychologistEntity } from "./entity/psychologist.entity";
 import { AutoEvaluationTestEntity } from "./entity/autoEvaluationTest.entity";
 import { Version1677065890207 } from "./migration/1677065890207-Version";
+import { EmotionEntity } from "./entity/emotion.entity";
+import { Version1677078673012 } from "./migration/1677078673012-Version";
 
 export const ormDataSource = new DataSource({
   type: 'postgres',
@@ -19,6 +21,7 @@ export const ormDataSource = new DataSource({
     PatientEntity,
     PsychologistEntity,
     AutoEvaluationTestEntity,
+    EmotionEntity
   ],
-  migrations: [Version1677065890207],
+  migrations: [Version1677065890207, Version1677078673012],
 });

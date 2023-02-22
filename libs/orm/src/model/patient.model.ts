@@ -40,7 +40,7 @@ export class PatientModel {
       this.autoEvaluationTest = [];
       for (const autoEvaluationTest of patient.autoEvaluationTest) {
         this.autoEvaluationTest.push(autoEvaluationTest);
-       createModel(AutoEvaluationTestModel, autoEvaluationTest);
+        createModel(AutoEvaluationTestModel, autoEvaluationTest);
       }
     }
   }
