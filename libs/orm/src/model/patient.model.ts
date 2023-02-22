@@ -1,5 +1,5 @@
 import { createModel, PatientEntity } from "@libs/orm";
-import { AutoObservationTestModel } from "./autoObservationTest.model";
+import { AutoEvaluationTestModel } from "./autoEvaluationTest.model";
 
 export class PatientModel {
   id: number;
@@ -26,7 +26,7 @@ export class PatientModel {
   /**
    * portfolio assets
    */
-  autoEvaluationTest: AutoObservationTestModel[];
+  autoEvaluationTest: AutoEvaluationTestModel[];
 
   constructor(patient: PatientEntity,) {
     this.id = patient.id;
@@ -36,11 +36,11 @@ export class PatientModel {
     this.dateOfBirth = patient.dateOfBirth;
     this.isEnabled = patient.isEnabled;
 
-    if (patient.autoObservationTest) {
+    if (patient.autoEvaluationTest) {
       this.autoEvaluationTest = [];
-      for (const autoEvaluationTest of patient.autoObservationTest) {
+      for (const autoEvaluationTest of patient.autoEvaluationTest) {
         this.autoEvaluationTest.push(autoEvaluationTest);
-       createModel(AutoObservationTestModel, autoEvaluationTest);
+       createModel(AutoEvaluationTestModel, autoEvaluationTest);
       }
     }
   }

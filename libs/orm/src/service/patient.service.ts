@@ -17,7 +17,7 @@ export async function getPatients(
 
   const options: FindManyOptions<PatientEntity> = {
     relations: {
-      autoObservationTest: true
+      autoEvaluationTest: true
     },
   };
 

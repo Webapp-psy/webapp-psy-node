@@ -1,5 +1,4 @@
 import {
-  Example,
   Get,
   OperationId,
   Query,
@@ -26,10 +25,6 @@ export class PatientController {
   @OperationId('getAllPatients')
   @SuccessResponse(200, 'List of patients')
   @Response(500, 'Internal Server Error')
-  @Example({
-    totalPatients: 1,
-    //  patient: [PortfolioDemoExample],
-  })
   static async getAllPatients(
     @Query() limit: number = MAX_ENTITIES_PER_PAGES,
     @Query() offset = 0,

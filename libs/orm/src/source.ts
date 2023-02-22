@@ -2,8 +2,8 @@ import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { PatientEntity } from "./entity/patient.entity";
 import { PsychologistEntity } from "./entity/psychologist.entity";
-import { AutoObservationTestEntity } from "./entity/autoObservationTest.entity";
-import { Version1676495753776 } from "./migration/1676495753776-Version";
+import { AutoEvaluationTestEntity } from "./entity/autoEvaluationTest.entity";
+import { Version1677065890207 } from "./migration/1677065890207-Version";
 
 export const ormDataSource = new DataSource({
   type: 'postgres',
@@ -18,7 +18,7 @@ export const ormDataSource = new DataSource({
   entities: [
     PatientEntity,
     PsychologistEntity,
-    AutoObservationTestEntity,
+    AutoEvaluationTestEntity,
   ],
-  migrations: [Version1676495753776],
+  migrations: [Version1677065890207],
 });

@@ -1,6 +1,5 @@
 import { FindManyOptions } from "typeorm";
-import { PatientEntity } from "@libs/orm";
-import { PatientModel } from "../model/patient.model";
+import { PatientEntity, PatientModel } from "@libs/orm";
 
 export interface PatientListParams {
   filter?: {

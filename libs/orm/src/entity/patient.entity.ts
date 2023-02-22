@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 import { TimestampableEntity } from "./timestampable.entity";
 import { PsychologistEntity } from "./psychologist.entity";
-import { AutoObservationTestEntity } from "./autoObservationTest.entity";
+import { AutoEvaluationTestEntity } from "./autoEvaluationTest.entity";
 
 @Entity('patient')
 export class PatientEntity extends TimestampableEntity {
@@ -38,13 +38,13 @@ export class PatientEntity extends TimestampableEntity {
   psychologist: PsychologistEntity;
 
   @OneToMany(
-    () => AutoObservationTestEntity,
-    (autoObservationTest: AutoObservationTestEntity) => autoObservationTest.patient,
+    () => AutoEvaluationTestEntity,
+    (autoEvaluationTest: AutoEvaluationTestEntity) => autoEvaluationTest.patient,
     {
       cascade: true,
     }
   )
-  autoObservationTest: AutoObservationTestEntity[];
+  autoEvaluationTest: AutoEvaluationTestEntity[];
 
   @DeleteDateColumn({ default: null, nullable: true })
   deletedAt: Date | null;

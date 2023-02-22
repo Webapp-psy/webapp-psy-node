@@ -1,12 +1,12 @@
 import { ormDataSource } from '../source';
-import { PatientEntity } from "@libs/orm";
-import { PatientListParams } from "../type/patient.type";
+import { AutoEvaluationTestEntity } from "@libs/orm";
 import { ILike } from "typeorm";
+import { AutoEvaluationTestListParams } from "../type/autoEvaluation.type";
 
-export const patientRepository = ormDataSource
-  .getRepository(PatientEntity)
+export const autoEvaluationTestRepository = ormDataSource
+  .getRepository(AutoEvaluationTestEntity)
   .extend({
-    // list, pagination, filter for patients
+    // list, pagination, filter for auto Evaluation
     findAndCountList({
                        filter,
                        take,
@@ -14,7 +14,7 @@ export const patientRepository = ormDataSource
                        columnSorted,
                        sort,
                        options = {},
-                     }: PatientListParams) {
+                     }: AutoEvaluationTestListParams) {
       options.take = take;
       options.skip = skip;
 
@@ -34,13 +34,10 @@ export const patientRepository = ormDataSource
         } else {
           options.where = [
             {
-              firstName: ILike('%' + String(filter.value) + '%'),
+              event: ILike('%' + String(filter.value) + '%'),
             },
             {
-              lastName: ILike('%' + String(filter.value) + '%'),
-            },
-            {
-              email: ILike('%' + String(filter.value) + '%'),
+              automaticThoughts: ILike('%' + String(filter.value) + '%'),
             },
           ];
         }
@@ -51,10 +48,9 @@ export const patientRepository = ormDataSource
         };
       }
 
-      return patientRepository.findAndCount({
+      return autoEvaluationTestRepository.findAndCount({
         ...options,
         relations: {
-          autoEvaluationTest: true,
           ...options?.relations,
         },
       });
