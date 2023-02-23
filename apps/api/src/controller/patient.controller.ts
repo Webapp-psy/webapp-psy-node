@@ -10,13 +10,17 @@ import {
 } from 'tsoa';
 import {
   createModel,
-  getPatients, HttpInternalServerError, HttpNotFoundError,
+  CreatePatientBody,
+  getPatients,
+  HttpInternalServerError,
+  HttpNotFoundError,
   MAX_ENTITIES_PER_PAGES,
   PatientEntity,
+  PatientListParams,
   PatientModel,
-  patientRepository
+  patientRepository,
+  PatientsResponse
 } from "@libs/orm";
-import { CreatePatientBody, PatientListParams, PatientsResponse } from "../../../../libs/orm/src/type/patient.type";
 import { EntityNotFoundError } from "typeorm";
 
 @Route()
@@ -29,7 +33,7 @@ export class PatientController {
    * @param columnSorted Column to order by
    * @param sort Sort mode
    */
-  @Tags('Patient')
+  @Tags('Patients')
   @Get('/')
   @OperationId('getAllPatients')
   @SuccessResponse(200, 'List of patients')

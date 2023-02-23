@@ -6,6 +6,7 @@ import { AutoEvaluationTestEntity } from "./entity/autoEvaluationTest.entity";
 import { Version1677065890207 } from "./migration/1677065890207-Version";
 import { EmotionEntity } from "./entity/emotion.entity";
 import { Version1677078673012 } from "./migration/1677078673012-Version";
+import { Version1677143386521 } from "./migration/1677143386521-Version";
 
 export const ormDataSource = new DataSource({
   type: 'postgres',
@@ -23,5 +24,10 @@ export const ormDataSource = new DataSource({
     AutoEvaluationTestEntity,
     EmotionEntity
   ],
-  migrations: [Version1677065890207, Version1677078673012],
+  migrations:
+    [
+      Version1677065890207,
+      Version1677078673012,
+      Version1677143386521
+    ],
 });

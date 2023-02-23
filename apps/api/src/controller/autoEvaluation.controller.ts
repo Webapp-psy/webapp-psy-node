@@ -7,11 +7,12 @@ import {
   SuccessResponse,
   Tags,
 } from 'tsoa';
-import { getAutoEvaluationTests, MAX_ENTITIES_PER_PAGES } from "@libs/orm";
 import {
   AutoEvaluationsResponse,
-  AutoEvaluationTestListParams
-} from "../../../../libs/orm/src/type/autoEvaluation.type";
+  AutoEvaluationTestListParams,
+  getAutoEvaluationTests,
+  MAX_ENTITIES_PER_PAGES
+} from "@libs/orm";
 
 @Route()
 export class AutoEvaluationController {
