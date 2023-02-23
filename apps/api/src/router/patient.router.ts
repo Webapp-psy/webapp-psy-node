@@ -47,8 +47,8 @@ patientRouter.put(
   checkErrorMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const admin = await PatientController.put(+req.params.id, req.body);
-      res.json(admin);
+      const patient = await PatientController.put(+req.params.id, req.body);
+      res.json(patient);
     } catch (e) {
       next(e);
     }

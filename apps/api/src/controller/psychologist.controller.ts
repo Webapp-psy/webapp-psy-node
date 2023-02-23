@@ -1,7 +1,7 @@
 import {
-  Body,
+  Body, Delete,
   Get, Inject,
-  OperationId, Path, Post,
+  OperationId, Path, Post, Put,
   Query,
   Response,
   Route,
@@ -12,6 +12,8 @@ import {
   createModel,
   CreatePsychologistBody,
   getPsychologists,
+  HttpInternalServerError,
+  HttpNotFoundError,
   MAX_ENTITIES_PER_PAGES,
   PatientListParams,
   PsychologistEntity,
@@ -19,6 +21,7 @@ import {
   psychologistRepository,
   PsychologistsResponse,
 } from "@libs/orm";
+import { EntityNotFoundError } from "typeorm";
 
 @Route()
 export class PsychologistController {
@@ -72,7 +75,7 @@ export class PsychologistController {
   @Response(500, 'Internal server error')
   static async create(
     @Body() postedData: CreatePsychologistBody
-  ): Promise<any> {
+  ) {
     postedData.isEnabled = true;
 
     return createModel(
@@ -81,5 +84,59 @@ export class PsychologistController {
         ...postedData,
       })
     );
+  }
+
+  /**
+   * @summary Update psychologist from id
+   */
+  @Put('/:id')
+  @OperationId('putPsychologist')
+  @SuccessResponse(200, 'Update a user psychologist entity')
+  @Response(404, 'Psychologist not found')
+  @Response(500, 'Server error')
+  static async put(@Path() id: number, @Body() body: any) {
+    return psychologistRepository
+      .findOneByOrFail({
+        id,
+      })
+      .then(async (psychologistEntity) => {
+        if (body.firstName) {
+          psychologistEntity.firstName = body.firstName;
+        }
+        if (body.lastName) {
+          psychologistEntity.lastName = body.lastName;
+        }
+        if (body.email) {
+          psychologistEntity.email = body.email;
+        }
+        if (typeof body.isEnabled === 'boolean') {
+          psychologistEntity.isEnabled = body.isEnabled;
+        }
+        return psychologistRepository.save(psychologistEntity);
+      })
+      .catch((e) => {
+        if (e instanceof EntityNotFoundError) {
+          throw HttpNotFoundError('Psychologist not found');
+        }
+        throw HttpInternalServerError(e.message);
+      });
+  }
+
+  /**
+   HttpError,
+   * @summary Delete a psychologist by id
+   * @param psychologist
+   * @param id psychologistId
+   */
+  @Delete('/:id')
+  @OperationId('deletePsychologist')
+  @Tags('deletePsychologist')
+  @Response(404, 'Not found')
+  @Response(500, 'Internal server error')
+  static async logicalDelete(
+    @Inject() psychologist: PsychologistEntity,
+    @Path() id: number
+  ) {
+    return await psychologistRepository.softDelete(psychologist.id);
   }
 }

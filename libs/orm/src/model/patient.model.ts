@@ -1,4 +1,4 @@
-import { createModel, PatientEntity } from "@libs/orm";
+import { createModel, PatientEntity, PsychologistEntity } from "@libs/orm";
 import { AutoEvaluationTestModel } from "./autoEvaluationTest.model";
 
 export class PatientModel {
@@ -24,6 +24,10 @@ export class PatientModel {
    */
   isEnabled: boolean;
   /**
+   * psychologist linked to the patient
+   */
+  psychologist: PsychologistEntity;
+  /**
    * patient autoEvaluationTests
    */
   autoEvaluationTest: AutoEvaluationTestModel[];
@@ -34,6 +38,7 @@ export class PatientModel {
     this.lastName = patient.lastName;
     this.email = patient.email;
     this.dateOfBirth = patient.dateOfBirth;
+    this.psychologist = patient.psychologist;
     this.isEnabled = patient.isEnabled;
 
     if (patient.autoEvaluationTest) {

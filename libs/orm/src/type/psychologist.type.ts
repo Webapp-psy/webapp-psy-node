@@ -29,4 +29,5 @@ export type CreatePsychologistBody = {
   lastName: string;
   email: string;
   isEnabled: boolean;
+  psychologist: number;
 };

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import { PsychologistController } from "../controller/psychologist.controller";
 import { checkErrorMiddleware } from "../middleware/errorMiddleware";
 import { psychologistHandlerMiddleware } from "../middleware/psychologistHandler.middleware";
+import { param } from "express-validator";
 
 const psychologistRouter = Router();
 
@@ -34,6 +35,37 @@ psychologistRouter.post(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const psychologist = await PsychologistController.create(req.body);
+      res.json(psychologist);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+
+psychologistRouter.put(
+  ('/:id'),
+  checkErrorMiddleware,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const psychologist = await PsychologistController.put(+req.params.id, req.body);
+      res.json(psychologist);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+
+psychologistRouter.delete(
+  ('/:id'),
+  param('id').isInt().toInt(),
+  checkErrorMiddleware,
+  psychologistHandlerMiddleware,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const psychologist = await PsychologistController.logicalDelete(
+        res.locals.psychologistEntity,
+        +req.params.id
+      );
       res.json(psychologist);
     } catch (e) {
       next(e);

@@ -75,7 +75,7 @@ export class PatientController {
   @Response(500, 'Internal server error')
   static async create(
     @Body() postedData: CreatePatientBody
-  ): Promise<any> {
+  ) {
     postedData.isEnabled = true;
 
     return createModel(
@@ -111,6 +111,9 @@ export class PatientController {
         }
         if (body.dateOfBirth) {
           patientEntity.dateOfBirth = body.dateOfBirth;
+        }
+        if (body.psychologist) {
+          patientEntity.psychologist = body.psychologist;
         }
         if (typeof body.isEnabled === 'boolean') {
           patientEntity.isEnabled = body.isEnabled;
