@@ -1,6 +1,7 @@
 import {
+  Body,
   Get,
-  OperationId,
+  OperationId, Post,
   Query,
   Response,
   Route,
@@ -10,8 +11,12 @@ import {
 import {
   AutoEvaluationsResponse,
   AutoEvaluationTestListParams,
+  AutoEvaluationTestModel,
+  autoEvaluationTestRepository,
+  createModel,
   getAutoEvaluationTests,
-  MAX_ENTITIES_PER_PAGES
+  MAX_ENTITIES_PER_PAGES,
+  PostAutoEvaluationBody
 } from "@libs/orm";
 
 @Route()
@@ -37,5 +42,24 @@ export class AutoEvaluationController {
     @Query() sort?: 'asc' | 'desc' | null
   ): Promise<AutoEvaluationsResponse> {
     return getAutoEvaluationTests(limit, offset, filter, columnSorted, sort, true);
+  }
+
+  /**
+   * @summary Create a autoevaluation test
+   * @param postedData
+   */
+  @Post('/')
+  @OperationId('autoEvaluationTestPost')
+  @Tags('AutoEvaluationAdministration')
+  @Response(500, 'Internal server error')
+  static async create(
+    @Body() postedData: PostAutoEvaluationBody
+  ): Promise<AutoEvaluationTestModel> {
+    return createModel(
+      AutoEvaluationTestModel,
+      await autoEvaluationTestRepository.save({
+        ...postedData,
+      })
+    );
   }
 }
