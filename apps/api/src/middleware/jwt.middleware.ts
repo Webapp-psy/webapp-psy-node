@@ -21,20 +21,6 @@ function verify(headers: Request['headers']) {
   }
 }
 
-export const authenticateJWTPatient = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const data = verify(req.headers);
-    res.locals.patient = data.patient;
-    next();
-  } catch (e) {
-    next(HttpUnauthorizedError('Invalid token'));
-  }
-};
-
 export const authenticateJWT = (
   req: Request,
   res: Response,
