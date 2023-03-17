@@ -11,7 +11,6 @@ function verify(headers: Request['headers']) {
 
   const token = authorization.replace('Bearer ', '');
 
-  console.log(token)
   try {
     return jwt.verify(
       token,
