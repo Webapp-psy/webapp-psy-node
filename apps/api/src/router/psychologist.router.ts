@@ -3,6 +3,7 @@ import { PsychologistController } from "../controller/psychologist.controller";
 import { checkErrorMiddleware } from "../middleware/errorMiddleware";
 import { psychologistHandlerMiddleware } from "../middleware/psychologistHandler.middleware";
 import { param } from "express-validator";
+import { authenticateJWT } from "../middleware/jwt.middleware";
 
 const psychologistRouter = Router();
 
@@ -20,6 +21,7 @@ psychologistRouter.get(
 psychologistRouter.get(
   ('/:id'),
   psychologistHandlerMiddleware,
+  authenticateJWT,
   (req: Request, res: Response, next: NextFunction) => {
     PsychologistController.get(res.locals.psychologistEntity, +req.params.pid)
       .then((psychologist) => {
@@ -44,6 +46,7 @@ psychologistRouter.post(
 
 psychologistRouter.put(
   ('/:id'),
+  authenticateJWT,
   checkErrorMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -58,6 +61,7 @@ psychologistRouter.put(
 psychologistRouter.delete(
   ('/:id'),
   param('id').isInt().toInt(),
+  authenticateJWT,
   checkErrorMiddleware,
   psychologistHandlerMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {

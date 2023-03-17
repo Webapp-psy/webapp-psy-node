@@ -9,6 +9,7 @@ export * from './model/autoEvaluationTest.model';
 export * from './model/patient.model';
 export * from './model/emotion.model';
 export * from './model/psychologist.model';
+export * from './util/exception.util';
 export * from './util/model.util';
 export * from './util/date.util';
 export * from './util/httpError.util';
@@ -19,6 +20,8 @@ export * from './repository/patient.repository';
 export * from './repository/psychologist.repository';
 export * from './repository/autoEvaluationTest.repository';
 export * from './repository/emotion.repository';
+export * from './type/auth.type';
 export * from './type/patient.type';
 export * from './type/psychologist.type';
 export * from './type/autoEvaluation.type';
+

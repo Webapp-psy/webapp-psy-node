@@ -21,6 +21,9 @@ export class PsychologistEntity extends TimestampableEntity {
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  password: string;
+
   @Column('boolean', { default: true })
   isEnabled: boolean;
 

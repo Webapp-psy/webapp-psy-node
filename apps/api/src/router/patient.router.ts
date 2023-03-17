@@ -3,6 +3,7 @@ import { PatientController } from "../controller/patient.controller";
 import { checkErrorMiddleware } from "../middleware/errorMiddleware";
 import { param } from "express-validator";
 import { patientHandlerMiddleware } from "../middleware/patientHandler.middleware";
+import { authenticateJWT } from "../middleware/jwt.middleware";
 
 const patientRouter = Router();
 
@@ -60,6 +61,7 @@ patientRouter.delete(
   param('id').isInt().toInt(),
   checkErrorMiddleware,
   patientHandlerMiddleware,
+  authenticateJWT,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const patient = await PatientController.logicalDelete(

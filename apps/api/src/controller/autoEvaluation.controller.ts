@@ -1,6 +1,6 @@
 import {
   Body,
-  Get,
+  Get, Inject,
   OperationId, Post,
   Query,
   Response,
@@ -16,6 +16,7 @@ import {
   createModel,
   getAutoEvaluationTests,
   MAX_ENTITIES_PER_PAGES,
+  PatientModel,
   PostAutoEvaluationBody
 } from "@libs/orm";
 
@@ -46,6 +47,7 @@ export class AutoEvaluationController {
 
   /**
    * @summary Create a autoevaluation test
+   * @param patient
    * @param postedData
    */
   @Post('/')
@@ -53,11 +55,13 @@ export class AutoEvaluationController {
   @Tags('AutoEvaluationAdministration')
   @Response(500, 'Internal server error')
   static async create(
+    @Inject() patient: PatientModel,
     @Body() postedData: PostAutoEvaluationBody
   ): Promise<AutoEvaluationTestModel> {
     return createModel(
       AutoEvaluationTestModel,
       await autoEvaluationTestRepository.save({
+        patient,
         ...postedData,
       })
     );

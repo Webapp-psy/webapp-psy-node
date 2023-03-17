@@ -27,6 +27,8 @@ export type PsychologistsResponse = {
 export type CreatePsychologistBody = {
   firstName: string;
   lastName: string;
+  password: string;
+  confirmPassword: string;
   email: string;
   isEnabled: boolean;
   psychologist: number;

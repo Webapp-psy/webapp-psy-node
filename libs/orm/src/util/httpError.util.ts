@@ -39,3 +39,10 @@ export function HttpInternalServerError(
 ) {
   return HttpError(500, message, params);
 }
+
+export function HttpUnauthorizedError(
+  message: string,
+  params?: HttpErrorParams
+) {
+  return HttpError(401, message, params);
+}

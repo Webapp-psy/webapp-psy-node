@@ -26,6 +26,8 @@ export type PatientsResponse = {
 export type CreatePatientBody = {
   firstName: string;
   lastName: string;
+  password: string;
+  confirmPassword: string;
   email: string;
   dateOfBirth?: Date;
   isEnabled: boolean;
@@ -38,3 +40,8 @@ export type PutPatient = {
   dateOfBirth?: Date;
   isEnabled?: boolean;
 };
+
+export interface SignInRequest {
+  email: string;
+  password: string;
+}

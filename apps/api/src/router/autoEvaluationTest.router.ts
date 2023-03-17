@@ -20,8 +20,8 @@ autoEvaluationRouter.post(
   checkErrorMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const portfolio = await AutoEvaluationController.create(req.body);
-      res.json(portfolio);
+      const autoEvaluations = await AutoEvaluationController.create(res.locals.patient, req.body);
+      res.json(autoEvaluations);
     } catch (e) {
       next(e);
     }

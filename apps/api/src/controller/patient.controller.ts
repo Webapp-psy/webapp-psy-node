@@ -1,7 +1,10 @@
 import {
   Body, Delete,
   Get, Inject,
-  OperationId, Path, Post, Put,
+  OperationId,
+  Path,
+  Post,
+  Put,
   Query,
   Response,
   Route,
@@ -13,6 +16,7 @@ import {
   CreatePatientBody,
   getPatients,
   HttpInternalServerError,
+  HttpNotAcceptableError,
   HttpNotFoundError,
   MAX_ENTITIES_PER_PAGES,
   PatientEntity,
@@ -22,6 +26,7 @@ import {
   PatientsResponse
 } from "@libs/orm";
 import { EntityNotFoundError } from "typeorm";
+import { hashPassword } from "../service/auth.service";
 
 @Route()
 export class PatientController {
@@ -77,6 +82,12 @@ export class PatientController {
     @Body() postedData: CreatePatientBody
   ) {
     postedData.isEnabled = true;
+
+    if (postedData.password == postedData.confirmPassword) {
+      postedData.password = await hashPassword(postedData.password);
+    } else {
+      throw HttpNotAcceptableError('Password are not identicals');
+    }
 
     return createModel(
       PatientModel,

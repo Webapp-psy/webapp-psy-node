@@ -22,6 +22,9 @@ export class PatientEntity extends TimestampableEntity {
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  password: string;
+
   @Column()
   dateOfBirth: Date;
 

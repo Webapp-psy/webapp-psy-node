@@ -7,6 +7,8 @@ import { Version1677065890207 } from "./migration/1677065890207-Version";
 import { EmotionEntity } from "./entity/emotion.entity";
 import { Version1677078673012 } from "./migration/1677078673012-Version";
 import { Version1677143386521 } from "./migration/1677143386521-Version";
+import { Version1679060224432 } from "./migration/1679060224432-Version";
+import { Version1679064687636 } from "./migration/1679064687636-Version";
 
 export const ormDataSource = new DataSource({
   type: 'postgres',
@@ -28,6 +30,8 @@ export const ormDataSource = new DataSource({
     [
       Version1677065890207,
       Version1677078673012,
-      Version1677143386521
+      Version1677143386521,
+      Version1679060224432,
+      Version1679064687636
     ],
 });
